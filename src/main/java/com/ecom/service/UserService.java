@@ -6,14 +6,13 @@ import com.ecom.request.CreateUserRequest;
 
 public interface UserService {
 
-    public User createUser(CreateUserRequest createUserRequest) throws Exception;
 
     public List<User> getAllUsers();
 
-    public User getUserById(Long id);
+    public User getUserById(Long id) throws Exception;
 
-    public void deleteUserById(Long id);
+    public void deleteUserById(Long id) throws Exception;
 
-    public User updateUser(Long id, CreateUserRequest createUserRequest);
+    public User updateUser(Long id, CreateUserRequest createUserRequest) throws Exception;
 
 }
