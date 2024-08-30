@@ -15,4 +15,6 @@ public interface UserService {
 
     public User updateUser(Long id, CreateUserRequest createUserRequest) throws Exception;
 
+    public User getUserByJwtToken(String jwtToken) throws Exception;
+
 }

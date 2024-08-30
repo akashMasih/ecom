@@ -1,11 +1,13 @@
 package com.ecom.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -38,5 +40,10 @@ public class User extends BaseEntity {
     @JsonIgnore
     @JoinColumn(name = "cart_id")
     private Cart cart;
+
+    private boolean isActive = true;
+
+    @ElementCollection
+    private List<Product> favoriteList = new ArrayList<Product>();
 
 }

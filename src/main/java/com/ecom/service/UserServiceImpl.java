@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecom.config.JwtProvider;
 import com.ecom.model.Address;
 import com.ecom.model.User;
 import com.ecom.repository.UserRepository;
@@ -16,6 +17,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JwtProvider jwtProvider;
 
     @Override
     public List<User> getAllUsers() {
@@ -55,6 +59,13 @@ public class UserServiceImpl implements UserService {
         if (createUserRequest.getPhone() != null)
             user.setPhone(createUserRequest.getPhone());
         userRepository.save(user);
+        return user;
+    }
+
+    @Override
+    public User getUserByJwtToken(String jwtToken) throws Exception {
+        String email = jwtProvider.getEmailFromJwtToken(jwtToken);
+        User user = userRepository.findByEmail(email);
         return user;
     }
 

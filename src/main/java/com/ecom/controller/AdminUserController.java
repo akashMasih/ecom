@@ -19,7 +19,7 @@ import com.ecom.service.UserService;
 
 @RestController
 @RequestMapping("/api/admin")
-public class UserAdminController {
+public class AdminUserController {
 
     @Autowired
     private UserService userService;
