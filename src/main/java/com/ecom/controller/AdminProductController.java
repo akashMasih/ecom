@@ -38,34 +38,6 @@ public class AdminProductController {
         return new ResponseEntity<>(product1, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    ResponseEntity<List<Product>> getAll() {
-        List<Product> products = productService.getAllProducts();
-        return new ResponseEntity<>(products, HttpStatus.OK);
-    }
 
-    @GetMapping("slug/{slug}")
-    ResponseEntity<Product> getBySlug(@PathVariable String slug) throws Exception {
-        Product product = productService.getProductBySlug(slug);
-        return new ResponseEntity<>(product, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    ResponseEntity<String> deleteProduct(@PathVariable Long id) throws Exception {
-        productService.deleteProductById(id);
-        return new ResponseEntity<>("product has been deleted successfully", HttpStatus.OK);
-    }
-
-    @GetMapping("/search")
-    ResponseEntity<List<Product>> searchProduct(@RequestParam String query)
-            throws Exception {
-        return new ResponseEntity<>(productService.searchProduct(query),
-                HttpStatus.OK);
-    }
-
-    @GetMapping("/category/{category}")
-    ResponseEntity<List<Product>> getProductsByCategory(@PathVariable String category) throws Exception {
-        return new ResponseEntity<>(productService.getProductsByCategory(category), HttpStatus.OK);
-    }
 
 }
