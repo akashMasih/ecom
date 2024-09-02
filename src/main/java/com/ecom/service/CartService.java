@@ -12,7 +12,7 @@ public interface CartService {
 
     public Cart removeItemFromCart(Long cartItemId, String jwt) throws Exception;
 
-    public Long calculateCartTotals(Cart cart) throws Exception;
+    public Double calculateCartTotals(Cart cart) throws Exception;
 
     public Cart findCartById(Long id) throws Exception;
 
