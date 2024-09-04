@@ -36,9 +36,9 @@ public class User extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "customer")
     @JsonIgnore
     @JoinColumn(name = "cart_id")
+    @OneToOne
     private Cart cart;
 
     private boolean isActive = true;

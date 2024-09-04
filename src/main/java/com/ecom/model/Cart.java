@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Cart extends BaseEntity {
 
-    @OneToOne
+    @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private User customer;
 
     private double total;

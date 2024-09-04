@@ -26,6 +26,7 @@ public class AppConfig {
                 .authorizeHttpRequests(Authorize -> Authorize
                         .requestMatchers("/api/admin/**").hasAnyRole("ADMIN", "RESTAURANT_OWNER")
                         .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/public/api/**").permitAll()
                         .anyRequest().permitAll())
                 .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable())

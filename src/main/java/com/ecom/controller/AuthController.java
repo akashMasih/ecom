@@ -22,13 +22,17 @@ import com.ecom.model.USER_ROLE;
 import com.ecom.model.User;
 import com.ecom.repository.CartRepository;
 import com.ecom.repository.UserRepository;
+import com.ecom.request.CreateUserRequest;
 import com.ecom.request.LoginRequest;
 import com.ecom.response.AuthResponse;
 import com.ecom.service.CustomUserDetailService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
-@RestController()
-@RequestMapping("auth")
+@RestController
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
@@ -46,7 +50,7 @@ public class AuthController {
     private CartRepository cartRepository;
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {
+    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody @Valid CreateUserRequest user) throws Exception {
         User isEmailExist = userRepository.findByEmail(user.getEmail());
 
         if (isEmailExist != null) {
@@ -77,7 +81,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<AuthResponse> loginHandler(@RequestBody LoginRequest req) throws Exception {
+    public ResponseEntity<AuthResponse> loginHandler(@RequestBody @Valid LoginRequest req) throws Exception {
         String userName = req.getEmail();
         String password = req.getPassword();
         Authentication authentication = authenticate(userName, password);

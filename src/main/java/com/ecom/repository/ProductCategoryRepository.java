@@ -6,4 +6,6 @@ import com.ecom.model.ProductCategory;
 
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Long> {
 
+    ProductCategory findByName(String name);
+
 }
