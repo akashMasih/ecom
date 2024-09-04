@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecom.model.Product;
 import com.ecom.request.CreateProductRequest;
+import com.ecom.response.MessageResponse;
 import com.ecom.service.ProductService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/admin/product")
@@ -24,7 +27,7 @@ public class AdminProductController {
     ProductService productService;
 
     @PostMapping
-    ResponseEntity<Product> createProduct(@RequestBody CreateProductRequest req) {
+    ResponseEntity<Product> createProduct(@RequestBody @Valid CreateProductRequest req) {
         Product product = productService.createProduct(req);
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
@@ -37,9 +40,10 @@ public class AdminProductController {
 
 
     @DeleteMapping("/{id}")
-    ResponseEntity<String> deleteProduct(@PathVariable Long id) throws Exception {
+    ResponseEntity<MessageResponse> deleteProduct(@PathVariable Long id) throws Exception {
         productService.deleteProductById(id);
-        return new ResponseEntity<>("product has been deleted successfully", HttpStatus.OK);
+        MessageResponse response = new MessageResponse("product has been deleted successfully");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

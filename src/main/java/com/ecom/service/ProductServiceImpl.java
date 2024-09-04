@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecom.exception.NotFoundException;
 import com.ecom.model.Product;
 import com.ecom.repository.ProductRepository;
 import com.ecom.request.CreateProductRequest;
@@ -39,11 +40,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(Long id) throws Exception {
+    public Product getProductById(Long id) throws NotFoundException {
 
         Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty()) {
-            throw new Exception("Product not found with id " + id);
+            throw new NotFoundException("Product not found with id " + id);
         } else {
             return product.get();
         }
@@ -64,10 +65,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductBySlug(String slug) throws Exception {
+    public Product getProductBySlug(String slug) throws NotFoundException {
 
         return productRepository.findBySlug(slug)
-                .orElseThrow(() -> new Exception("Product not found with slug " + slug));
+                .orElseThrow(() -> new NotFoundException("Product not found with slug " + slug));
     }
 
     private String generateUniqueSlug(String baseSlug) {

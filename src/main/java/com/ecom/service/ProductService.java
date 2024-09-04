@@ -2,6 +2,7 @@ package com.ecom.service;
 
 import java.util.List;
 
+import com.ecom.exception.NotFoundException;
 import com.ecom.model.Product;
 import com.ecom.request.CreateProductRequest;
 
@@ -9,11 +10,11 @@ public interface ProductService {
 
     public List<Product> getAllProducts();
 
-    public Product getProductById(Long id) throws Exception;
+    public Product getProductById(Long id) throws NotFoundException;
 
     public List<Product> getProductsByCategory(String category);
 
-    public Product getProductBySlug(String slug) throws Exception;
+    public Product getProductBySlug(String slug) throws NotFoundException;
 
     public boolean existedBySlug(String slug);
 
